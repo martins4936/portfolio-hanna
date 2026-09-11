@@ -92,7 +92,7 @@ export default function RootLayout({
           rel="noopener noreferrer"
           aria-label="Built by Caique Martins"
           className="
-            fixed bottom-5 right-5 z-[9000]
+            fixed bottom-5 left-5 z-[9000]
             flex items-center gap-2
             px-4 py-2.5
             rounded-full
