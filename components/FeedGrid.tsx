@@ -113,7 +113,7 @@ const cards: Card[] = [
 ];
 
 /* ─── Card Component ─────────────────────────────────────── */
-function PortfolioCard({ card, index, priority, onImageClick }: { card: Card; index: number; priority?: boolean; onImageClick: (src: string) => void }) {
+function PortfolioCard({ card, index, priority, onCardClick }: { card: Card; index: number; priority?: boolean; onCardClick: (idx: number) => void }) {
   const [hovered, setHovered] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
@@ -143,7 +143,7 @@ function PortfolioCard({ card, index, priority, onImageClick }: { card: Card; in
     >
       <div
         onClick={() => {
-          if (card.image) onImageClick(card.image);
+          if (card.image) onCardClick(index);
         }}
         className={`
           relative rounded-2xl overflow-hidden group cursor-pointer ${minH} flex flex-col
@@ -286,13 +286,27 @@ const filters: { key: Filter; label: string }[] = [
 /* ─── Main ───────────────────────────────────────────────── */
 export default function FeedGrid() {
   const [active, setActive] = useState<Filter>("todos");
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   const filtered = active === "todos" ? cards : cards.filter((c) => c.filter === active);
 
-  const closeImage = () => setSelectedImage(null);
+  const closeImage = () => setSelectedIndex(null);
+  
+  const nextImage = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (selectedIndex !== null && selectedIndex < filtered.length - 1) {
+      setSelectedIndex(selectedIndex + 1);
+    }
+  };
+  
+  const prevImage = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (selectedIndex !== null && selectedIndex > 0) {
+      setSelectedIndex(selectedIndex - 1);
+    }
+  };
 
   return (
     <section id="trabalhos" ref={ref} className="max-w-6xl mx-auto px-6 pb-24">
@@ -307,7 +321,7 @@ export default function FeedGrid() {
         {filters.map((f) => (
           <button
             key={f.key}
-            onClick={() => setActive(f.key)}
+            onClick={() => { setActive(f.key); setSelectedIndex(null); }}
             className={`
               px-4 py-1.5 rounded-full text-xs font-medium tracking-wide
               active:scale-95 transition-all duration-300 ease-in-out
@@ -330,48 +344,92 @@ export default function FeedGrid() {
             card={card}
             index={i}
             priority={i < 5}
-            onImageClick={setSelectedImage}
+            onCardClick={setSelectedIndex}
           />
         ))}
       </div>
 
-      {/* Lightbox / Imagem Full Screen */}
+      {/* Lightbox / Post Modal */}
       <AnimatePresence>
-        {selectedImage && (
+        {selectedIndex !== null && filtered[selectedIndex] && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 md:p-8"
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-md p-4 md:p-12"
             onClick={closeImage}
           >
-            {/* Botão Fechar */}
-            <button
-              onClick={closeImage}
-              className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/80 transition-colors z-50 text-xl"
-              aria-label="Fechar"
-            >
-              ×
-            </button>
-            
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-5xl h-full max-h-[90vh] rounded-xl overflow-hidden shadow-2xl"
-              onClick={(e) => e.stopPropagation()} // evita fechar ao clicar na imagem
+              className="relative w-full max-w-2xl bg-[#FDFBF7] rounded-[24px] overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.4)] flex flex-col max-h-[90vh]"
+              onClick={(e) => e.stopPropagation()} 
             >
-              <Image
-                src={selectedImage}
-                alt="Expandida"
-                fill
-                className="object-contain"
-                sizes="100vw"
-                quality={90}
-                priority
-              />
+              {/* Botão Fechar */}
+              <button
+                onClick={closeImage}
+                className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70 backdrop-blur-md transition-colors z-50 text-sm"
+              >
+                ✕
+              </button>
+
+              {/* Área da Imagem */}
+              <div className="relative w-full h-[40vh] sm:h-[50vh] bg-[#E8E0D8] shrink-0" style={{ backgroundColor: filtered[selectedIndex].bg }}>
+                <Image
+                  src={filtered[selectedIndex].image!}
+                  alt={filtered[selectedIndex].title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 800px"
+                  priority
+                />
+              </div>
+
+              {/* Área do Texto (Legenda estilo post) */}
+              <div className="p-6 md:p-8 bg-white border-t border-[#E8E0D8] overflow-y-auto">
+                <p className="text-[10px] tracking-[0.2em] uppercase text-[#D4A3A3] font-bold mb-2">
+                  {filtered[selectedIndex].category}
+                </p>
+                <h3 className="font-[family-name:var(--font-display)] font-bold text-2xl md:text-3xl text-[#2D2D2D] mb-1 leading-tight">
+                  {filtered[selectedIndex].title}
+                </h3>
+                {filtered[selectedIndex].subtitle && (
+                  <p className="text-sm md:text-base text-[#7A716C] mb-5 font-medium">
+                    {filtered[selectedIndex].subtitle}
+                  </p>
+                )}
+                <div className="flex flex-wrap gap-2">
+                  {filtered[selectedIndex].tags.map((t) => (
+                    <span key={t} className="px-3 py-1 bg-[#F5F2EB] text-[#7A716C] border border-[#E8E0D8] text-[10px] uppercase font-bold rounded-full tracking-wider">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Navegação Lado/Lado (Dentro da imagem, nas bordas) */}
+              {selectedIndex > 0 && (
+                <button
+                  onClick={prevImage}
+                  className="absolute top-[25vh] sm:top-[30vh] left-4 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-white/80 hover:bg-white text-[#2D2D2D] shadow-lg backdrop-blur-md transition-all active:scale-95 z-40"
+                  aria-label="Anterior"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+              )}
+              {selectedIndex < filtered.length - 1 && (
+                <button
+                  onClick={nextImage}
+                  className="absolute top-[25vh] sm:top-[30vh] right-4 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-white/80 hover:bg-white text-[#2D2D2D] shadow-lg backdrop-blur-md transition-all active:scale-95 z-40"
+                  aria-label="Próximo"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+              )}
+
             </motion.div>
           </motion.div>
         )}
