@@ -314,7 +314,7 @@ export default function FeedGrid() {
       </motion.div>
 
       {/* Masonry via CSS columns */}
-      <div className="columns-2 md:columns-3 gap-3">
+      <div className="columns-1 sm:columns-2 md:columns-3 gap-4">
         {filtered.map((card, i) => (
           <PortfolioCard
             key={card.id}
