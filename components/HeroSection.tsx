@@ -30,7 +30,7 @@ export default function HeroSection() {
           Hanna Mel da Silva
         </h1>
         <p className="text-[10px] sm:text-xs tracking-[0.2em] uppercase text-[#9A8F88] font-medium">
-          SOCIAL MEDIA // RELAÇÕES PÚBLICAS // DESIGN EDITORIAL
+          PUBLICIDADE E PROPAGANDA
         </p>
       </motion.div>
 
