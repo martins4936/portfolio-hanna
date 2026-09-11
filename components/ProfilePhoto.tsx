@@ -19,7 +19,7 @@ interface Settings {
   posY: number;   // 0 → 100%   (foco vertical — 0 = topo)
 }
 
-const DEFAULT: Settings = { zoom: 1.0, posX: 50, posY: 10 };
+const DEFAULT: Settings = { zoom: 1.0, posX: 50, posY: 40 };
 
 function load(): Settings {
   if (typeof window === "undefined") return DEFAULT;
