@@ -87,7 +87,7 @@ export default function RootLayout({
 
         {/* ── Badge "Built by Caique Martins" ── */}
         <a
-          href="https://github.com/martins4936"
+          href="https://www.linkedin.com/in/caiquealmeidati/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Built by Caique Martins"

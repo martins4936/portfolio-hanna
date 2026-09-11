@@ -87,7 +87,7 @@ export default function Footer() {
         >
           <p>© {new Date().getFullYear()} Hanna Mel</p>
           <a
-            href="https://github.com/martins4936"
+            href="https://www.linkedin.com/in/caiquealmeidati/"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 hover:text-[#D4A3A3] transition-colors duration-300 group"
