@@ -33,8 +33,8 @@ export default function Header() {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#FDFBF7]/90 backdrop-blur-lg border-b border-[#E8E0D8] shadow-[0_1px_20px_rgba(45,45,45,0.06)]"
-          : "bg-[#FDFBF7]"
+          ? "bg-[#F4EFE6]/90 backdrop-blur-lg border-b border-[#E8E0D8] shadow-[0_1px_20px_rgba(45,45,45,0.06)]"
+          : "bg-[#F4EFE6]"
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
@@ -104,7 +104,7 @@ export default function Header() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="md:hidden bg-[#FDFBF7] border-t border-[#E8E0D8] overflow-hidden"
+            className="md:hidden bg-[#F4EFE6] border-t border-[#E8E0D8] overflow-hidden"
           >
             <div className="flex flex-col px-6 py-5 gap-5">
               {navLinks.map((l) => (

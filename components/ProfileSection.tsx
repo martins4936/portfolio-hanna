@@ -34,7 +34,7 @@ export default function ProfileSection() {
             className="w-28 h-28 md:w-36 md:h-36 rounded-full p-[3px]"
             style={{ background: "linear-gradient(135deg, #D4A3A3, #c8848490)" }}
           >
-            <div className="w-full h-full rounded-full bg-[#EDE7DF] flex items-center justify-center overflow-hidden border-2 border-[#FDFBF7]">
+            <div className="w-full h-full rounded-full bg-[#EDE7DF] flex items-center justify-center overflow-hidden border-2 border-[#F4EFE6]">
               {/* Substitua por <Image src="/hanna.jpg" .../> quando tiver foto */}
               <span className="font-[family-name:var(--font-display)] font-bold text-3xl text-[#D4A3A3] select-none">
                 HM
@@ -42,7 +42,7 @@ export default function ProfileSection() {
             </div>
           </div>
           {/* Disponível */}
-          <span className="absolute bottom-1 right-1 w-4 h-4 bg-[#7BC67E] rounded-full border-2 border-[#FDFBF7]" />
+          <span className="absolute bottom-1 right-1 w-4 h-4 bg-[#7BC67E] rounded-full border-2 border-[#F4EFE6]" />
         </div>
 
         {/* Info ──────────────────────────────────────── */}

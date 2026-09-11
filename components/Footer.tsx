@@ -86,7 +86,7 @@ export default function Footer() {
                 */
                 className="group flex items-center gap-4 px-5 py-4
                            border border-[#E8E0D8] rounded-xl
-                           bg-[#FDFBF7] hover:bg-[#F5E6E6]/40
+                           bg-[#F4EFE6] hover:bg-[#F5E6E6]/40
                            hover:border-[#D4A3A3] hover:-translate-y-1
                            hover:shadow-[0_8px_24px_rgba(45,45,45,0.08)]
                            active:scale-[0.98] active:translate-y-0 active:shadow-none

@@ -6,7 +6,7 @@ import BackToTop from "@/components/BackToTop";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#FDFBF7] text-[#2D2D2D]">
+    <main className="min-h-screen bg-[#F4EFE6] text-[#2D2D2D]">
       <Header />
       <HeroSection />
       <FeedGrid />
