@@ -3,121 +3,87 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-const links = [
-  { emoji: "💼", label: "LinkedIn",  handle: "hanna-mel-62406b267",  href: "https://www.linkedin.com/in/hanna-mel-62406b267/" },
-  { emoji: "✉️", label: "E-mail",    handle: "hannamell26@gmail.com", href: "mailto:hannamell26@gmail.com" },
-  { emoji: "💬", label: "WhatsApp",  handle: "(11) 93303-7658",       href: "https://wa.me/5511933037658" },
-];
-
 export default function Footer() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <footer id="contato" ref={ref} className="border-t border-[#E8E0D8] py-20">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-16 items-start">
+    <footer id="contato" ref={ref} className="bg-[#2D2D2D] py-24 sm:py-32 rounded-t-[40px] md:rounded-t-[3rem] relative overflow-hidden mt-12">
+      
+      {/* Background Aura (brilho rosado sutil no fundo) */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#D4A3A3]/10 blur-[100px] rounded-full pointer-events-none"></div>
 
-          {/* ── Headline ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col gap-6"
+      <div className="max-w-4xl mx-auto px-6 relative z-10 flex flex-col items-center text-center">
+        
+        {/* Label */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="flex items-center gap-3 mb-8"
+        >
+          <span className="w-2 h-2 rounded-full bg-[#D4A3A3]" />
+          <span className="text-[10px] tracking-[0.3em] uppercase text-[#F4EFE6]/60">Contato</span>
+        </motion.div>
+
+        {/* Headline GIGANTE */}
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="font-[family-name:var(--font-display)] text-5xl sm:text-7xl md:text-[5rem] text-[#F4EFE6] leading-[1.05] mb-8 tracking-tight"
+        >
+          A narrativa <br className="hidden sm:block" />
+          <span className="text-[#D4A3A3] italic font-serif">certa</span> espera por nós.
+        </motion.h2>
+
+        {/* Bio */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="text-sm sm:text-base text-[#F4EFE6]/70 max-w-lg mb-12 leading-relaxed"
+        >
+          Disponível para estágios, projetos freelance e novas oportunidades em <span className="text-[#F4EFE6] font-semibold">Comunicação, Marketing e Criação</span>.
+        </motion.p>
+
+        {/* CTAs */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 mb-24 w-full sm:w-auto"
+        >
+          <a
+            href="https://wa.me/5511933037658"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto px-8 py-4 bg-[#D4A3A3] text-white rounded-full font-bold text-sm hover:scale-105 hover:bg-[#C09090] transition-all duration-300 shadow-[0_0_30px_rgba(212,163,163,0.25)] active:scale-95"
           >
-            <div className="flex items-center gap-3">
-              <span className="w-6 h-px bg-[#D4A3A3]" />
-              <span className="text-[10px] tracking-[0.3em] uppercase text-[#9A8F88]">Contato</span>
-            </div>
+            Falar no WhatsApp
+          </a>
+          <a
+            href="https://www.linkedin.com/in/hanna-mel-62406b267/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto px-8 py-4 bg-transparent border border-[#F4EFE6]/30 text-[#F4EFE6] rounded-full font-bold text-sm hover:bg-[#F4EFE6] hover:text-[#2D2D2D] transition-all duration-300 active:scale-95"
+          >
+            LinkedIn ↗
+          </a>
+          <a
+            href="mailto:hannamell26@gmail.com"
+            className="w-full sm:w-auto px-8 py-4 bg-transparent border border-[#F4EFE6]/30 text-[#F4EFE6] rounded-full font-bold text-sm hover:bg-[#F4EFE6] hover:text-[#2D2D2D] transition-all duration-300 active:scale-95"
+          >
+            E-mail ↗
+          </a>
+        </motion.div>
 
-            <h2 className="font-[family-name:var(--font-display)] font-bold text-4xl md:text-5xl text-[#2D2D2D] leading-[1.1]">
-              Vamos construir<br />
-              conversas{" "}
-              <span className="text-[#D4A3A3]">relevantes</span>
-              <br />juntas?
-            </h2>
-
-            <p className="text-sm text-[#9A8F88] leading-relaxed max-w-[340px]">
-              Disponível para estágios, projetos freelance e novas{" "}
-              <span className="font-semibold text-[#2D2D2D]">
-                oportunidades em diversas áreas da Comunicação, Marketing e Criação
-              </span>.
-            </p>
-
-            {/* Badge disponível */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5
-                            bg-[#F5F1EB] border border-[#E8E0D8] rounded-full w-fit">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#7BC67E] animate-pulse" />
-              <span className="text-xs text-[#2D2D2D]">Disponível · São Paulo - SP</span>
-            </div>
-
-            {/* CTA de e-mail com feedback tátil completo */}
-            <a
-              href="https://wa.me/5511933037658"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="self-start px-6 py-3 text-sm font-semibold bg-[#D4A3A3] text-white rounded-full
-                         hover:bg-[#C09090] hover:shadow-[0_8px_30px_rgba(212,163,163,0.4)]
-                         active:scale-95 active:shadow-none
-                         transition-all duration-300 ease-in-out"
-            >
-              Enviar mensagem →
-            </a>
-          </motion.div>
-
-          {/* ── Links de contato ── */}
-          <div className="flex flex-col gap-2">
-            {links.map((l, i) => (
-              <motion.a
-                key={l.label}
-                href={l.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, x: 20 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.45, delay: 0.2 + i * 0.08 }}
-                /*
-                  Hover:
-                  - -translate-y-1  → leve elevação
-                  - shadow-md       → sombra de profundidade
-                  - border rosé     → indicador de acento ativo
-                  Active:
-                  - scale-[0.98]    → compressão tátil ao clicar
-                */
-                className="group flex items-center gap-4 px-5 py-4
-                           border border-[#E8E0D8] rounded-xl
-                           bg-[#F4EFE6] hover:bg-[#F5E6E6]/40
-                           hover:border-[#D4A3A3] hover:-translate-y-1
-                           hover:shadow-[0_8px_24px_rgba(45,45,45,0.08)]
-                           active:scale-[0.98] active:translate-y-0 active:shadow-none
-                           transition-all duration-300 ease-in-out"
-              >
-                <span className="text-xl">{l.emoji}</span>
-                <div className="flex-1 min-w-0">
-                  <p className="text-[9px] tracking-widest uppercase text-[#9A8F88]">{l.label}</p>
-                  <p className="text-sm text-[#2D2D2D] group-hover:text-[#D4A3A3]
-                                transition-colors duration-300 font-medium truncate">
-                    {l.handle}
-                  </p>
-                </div>
-                <span className="text-[#E8E0D8] group-hover:text-[#D4A3A3]
-                                 group-hover:translate-x-1
-                                 transition-all duration-300 ease-in-out">
-                  →
-                </span>
-              </motion.a>
-            ))}
-          </div>
-        </div>
-
-        {/* ── Bottom bar ── */}
+        {/* Bottom Bar minimalista */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.7 }}
-          className="mt-16 pt-6 border-t border-[#E8E0D8]
-                     flex flex-col sm:flex-row justify-between gap-2
-                     text-[10px] tracking-widest uppercase text-[#9A8F88]"
+          transition={{ duration: 0.7, delay: 0.6 }}
+          className="w-full pt-8 border-t border-[#F4EFE6]/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] tracking-widest uppercase text-[#F4EFE6]/40"
         >
           <p>© {new Date().getFullYear()} Hanna Mel da Silva</p>
           <p>São Paulo · SP · Brasil</p>
