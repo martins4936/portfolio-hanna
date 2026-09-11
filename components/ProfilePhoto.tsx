@@ -94,11 +94,13 @@ export default function ProfilePhoto() {
   return (
     <div className="shrink-0 flex flex-col items-center gap-4 relative z-20" style={{ perspective: "1000px" }}>
 
-      {/* ── Glass Card Arch com 3D Tilt ── */}
+      {/* ── Glass Card Arch com Levitação Contínua e 3D Tilt ── */}
       <motion.div
         ref={ref}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
+        animate={{ y: [0, -12, 0] }}
+        transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
         className="relative p-3 bg-white/40 backdrop-blur-xl border border-white/60 
                    rounded-t-[200px] rounded-b-[40px] shadow-[0_30px_60px_rgba(212,163,163,0.15)] 
