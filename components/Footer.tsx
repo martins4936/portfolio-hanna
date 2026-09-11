@@ -23,7 +23,7 @@ export default function Footer() {
           className="flex items-center gap-3 mb-8"
         >
           <span className="w-2 h-2 rounded-full bg-[#D4A3A3]" />
-          <span className="text-[10px] tracking-[0.3em] uppercase text-[#F4EFE6]/60">Contato</span>
+          <span className="text-[10px] tracking-[0.3em] uppercase text-[#E4DAC4]/60">Contato</span>
         </motion.div>
 
         {/* Headline GIGANTE */}
@@ -31,7 +31,7 @@ export default function Footer() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="font-[family-name:var(--font-display)] text-5xl sm:text-7xl md:text-[5rem] text-[#F4EFE6] leading-[1.05] mb-8 tracking-tight"
+          className="font-[family-name:var(--font-display)] text-5xl sm:text-7xl md:text-[5rem] text-[#E4DAC4] leading-[1.05] mb-8 tracking-tight"
         >
           A narrativa <br className="hidden sm:block" />
           <span className="text-[#D4A3A3] italic font-serif">certa</span> espera por nós.
@@ -42,9 +42,9 @@ export default function Footer() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-sm sm:text-base text-[#F4EFE6]/70 max-w-lg mb-12 leading-relaxed"
+          className="text-sm sm:text-base text-[#E4DAC4]/70 max-w-lg mb-12 leading-relaxed"
         >
-          Disponível para estágios, projetos freelance e novas oportunidades em <span className="text-[#F4EFE6] font-semibold">Comunicação, Marketing e Criação</span>.
+          Disponível para estágios, projetos freelance e novas oportunidades em <span className="text-[#E4DAC4] font-semibold">Comunicação, Marketing e Criação</span>.
         </motion.p>
 
         {/* CTAs */}
@@ -66,13 +66,13 @@ export default function Footer() {
             href="https://www.linkedin.com/in/hanna-mel-62406b267/"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto px-8 py-4 bg-transparent border border-[#F4EFE6]/30 text-[#F4EFE6] rounded-full font-bold text-sm hover:bg-[#F4EFE6] hover:text-[#2D2D2D] transition-all duration-300 active:scale-95"
+            className="w-full sm:w-auto px-8 py-4 bg-transparent border border-[#E4DAC4]/30 text-[#E4DAC4] rounded-full font-bold text-sm hover:bg-[#E4DAC4] hover:text-[#2D2D2D] transition-all duration-300 active:scale-95"
           >
             LinkedIn ↗
           </a>
           <a
             href="mailto:hannamell26@gmail.com"
-            className="w-full sm:w-auto px-8 py-4 bg-transparent border border-[#F4EFE6]/30 text-[#F4EFE6] rounded-full font-bold text-sm hover:bg-[#F4EFE6] hover:text-[#2D2D2D] transition-all duration-300 active:scale-95"
+            className="w-full sm:w-auto px-8 py-4 bg-transparent border border-[#E4DAC4]/30 text-[#E4DAC4] rounded-full font-bold text-sm hover:bg-[#E4DAC4] hover:text-[#2D2D2D] transition-all duration-300 active:scale-95"
           >
             E-mail ↗
           </a>
@@ -83,9 +83,9 @@ export default function Footer() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.7, delay: 0.6 }}
-          className="w-full pt-8 border-t border-[#F4EFE6]/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] tracking-widest uppercase text-[#F4EFE6]/40"
+          className="w-full pt-8 border-t border-[#E4DAC4]/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] tracking-widest uppercase text-[#E4DAC4]/40"
         >
-          <p>© {new Date().getFullYear()} Hanna Mel da Silva</p>
+          <p>© {new Date().getFullYear()} Hanna Mel</p>
           <p>São Paulo · SP · Brasil</p>
         </motion.div>
       </div>

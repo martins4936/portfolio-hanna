@@ -27,7 +27,7 @@ export default function HeroSection() {
         className="relative z-10 flex flex-col items-center text-center mb-12"
       >
         <h1 className="font-[family-name:var(--font-display)] font-bold text-5xl md:text-7xl lg:text-8xl text-[#2D2D2D] leading-tight tracking-tight mb-4">
-          Hanna Mel da Silva
+          Hanna Mel
         </h1>
         <p className="text-[10px] sm:text-xs tracking-[0.2em] uppercase text-[#9A8F88] font-medium">
           PUBLICIDADE E PROPAGANDA

@@ -22,7 +22,7 @@ const lato = Lato({
 export const metadata: Metadata = {
   title: "Hanna Mel · Social Media & Marketing",
   description:
-    "Portfólio de Hanna Mel da Silva — Social Media, Relações Públicas e Comunicação Estratégica. São Paulo - SP.",
+    "Portfólio de Hanna Mel — Social Media, Relações Públicas e Comunicação Estratégica. São Paulo - SP.",
   openGraph: {
     title: "Hanna Mel · Social Media & Marketing",
     description:

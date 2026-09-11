@@ -122,7 +122,7 @@ export default function ProfilePhoto() {
           >
             <Image
               src="/hanna.jpg"
-              alt="Hanna Mel da Silva"
+              alt="Hanna Mel"
               fill
               className="object-cover"
               style={{ objectPosition: `${posX}% ${posY}%` }}

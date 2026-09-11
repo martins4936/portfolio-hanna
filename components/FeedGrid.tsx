@@ -312,7 +312,7 @@ export default function FeedGrid() {
               px-4 py-1.5 rounded-full text-xs font-medium tracking-wide
               active:scale-95 transition-all duration-300 ease-in-out
               ${active === f.key
-                ? "bg-[#2D2D2D] text-[#F4EFE6] shadow-[0_4px_12px_rgba(45,45,45,0.15)]"
+                ? "bg-[#2D2D2D] text-[#E4DAC4] shadow-[0_4px_12px_rgba(45,45,45,0.15)]"
                 : "border border-[#E8E0D8] text-[#9A8F88] hover:border-[#D4A3A3] hover:text-[#D4A3A3] hover:bg-[#F5E6E6]/50"
               }
             `}

@@ -34,7 +34,7 @@ export default function ProfileSection() {
             className="w-28 h-28 md:w-36 md:h-36 rounded-full p-[3px]"
             style={{ background: "linear-gradient(135deg, #D4A3A3, #c8848490)" }}
           >
-            <div className="w-full h-full rounded-full bg-[#EDE7DF] flex items-center justify-center overflow-hidden border-2 border-[#F4EFE6]">
+            <div className="w-full h-full rounded-full bg-[#EDE7DF] flex items-center justify-center overflow-hidden border-2 border-[#E4DAC4]">
               {/* Substitua por <Image src="/hanna.jpg" .../> quando tiver foto */}
               <span className="font-[family-name:var(--font-display)] font-bold text-3xl text-[#D4A3A3] select-none">
                 HM
@@ -42,7 +42,7 @@ export default function ProfileSection() {
             </div>
           </div>
           {/* Disponível */}
-          <span className="absolute bottom-1 right-1 w-4 h-4 bg-[#7BC67E] rounded-full border-2 border-[#F4EFE6]" />
+          <span className="absolute bottom-1 right-1 w-4 h-4 bg-[#7BC67E] rounded-full border-2 border-[#E4DAC4]" />
         </div>
 
         {/* Info ──────────────────────────────────────── */}
@@ -52,7 +52,7 @@ export default function ProfileSection() {
           <div>
             <p className="text-[#9A8F88] text-sm font-medium mb-0.5">@hannamell</p>
             <h1 className="font-[family-name:var(--font-display)] font-bold text-2xl md:text-3xl text-[#2D2D2D]">
-              Hanna Mel da Silva
+              Hanna Mel
             </h1>
             {/* Localização */}
             <p className="text-xs text-[#9A8F88] mt-1 flex items-center justify-center md:justify-start gap-1">
