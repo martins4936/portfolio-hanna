@@ -39,7 +39,7 @@ export default function HeroSection() {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-        className="relative z-10 w-full max-w-3xl mx-auto flex justify-center mb-16"
+        className="relative z-50 w-full max-w-3xl mx-auto flex justify-center mb-16"
       >
         {/* Estrela (Canto superior esquerdo) */}
         <motion.svg
