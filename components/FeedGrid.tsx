@@ -158,7 +158,7 @@ function PortfolioCard({ card, index, priority, onCardClick }: { card: Card; ind
       >
         {/* Imagem real de fundo */}
         {card.image && (
-          <motion.div layoutId={`image-${card.id}`} className="absolute inset-0 w-full h-full z-0">
+          <div className="absolute inset-0 w-full h-full z-0">
             <Image
               src={card.image}
               alt={card.title}
@@ -168,7 +168,7 @@ function PortfolioCard({ card, index, priority, onCardClick }: { card: Card; ind
               priority={priority}
               loading={priority ? "eager" : "lazy"}
             />
-          </motion.div>
+          </div>
         )}
 
         {/* Header estilo Instagram (card de perfil) */}
@@ -359,18 +359,44 @@ export default function FeedGrid() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 md:p-12"
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-md p-4 md:p-12"
             onClick={closeImage}
           >
+            {/* Navegação (Lado de fora do Modal) */}
+            {selectedIndex > 0 && (
+              <motion.button
+                whileHover={{ scale: 1.1, backgroundColor: "#ffffff", color: "#2D2D2D" }}
+                whileTap={{ scale: 0.9 }}
+                onClick={prevImage}
+                className="absolute left-2 sm:left-8 top-1/2 -translate-y-1/2 w-12 h-12 hidden sm:flex items-center justify-center rounded-full bg-white/10 text-white shadow-lg backdrop-blur-md z-40 transition-colors"
+                aria-label="Anterior"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              </motion.button>
+            )}
+            
+            {selectedIndex < filtered.length - 1 && (
+              <motion.button
+                whileHover={{ scale: 1.1, backgroundColor: "#ffffff", color: "#2D2D2D" }}
+                whileTap={{ scale: 0.9 }}
+                onClick={nextImage}
+                className="absolute right-2 sm:right-8 top-1/2 -translate-y-1/2 w-12 h-12 hidden sm:flex items-center justify-center rounded-full bg-white/10 text-white shadow-lg backdrop-blur-md z-40 transition-colors"
+                aria-label="Próximo"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+              </motion.button>
+            )}
+
+            {/* Container Principal do Post */}
             <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              initial={{ scale: 0.95, opacity: 0, y: 15 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-lg bg-[#FDFBF7] rounded-[24px] overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.5)] flex flex-col max-h-[85vh]"
+              exit={{ scale: 0.95, opacity: 0, y: 15 }}
+              transition={{ type: "spring", damping: 30, stiffness: 350 }}
+              className="relative w-full max-w-lg bg-[#FDFBF7] rounded-[20px] overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.5)] flex flex-col max-h-[90vh]"
               onClick={(e) => e.stopPropagation()} 
             >
-              {/* Botão Fechar */}
+              {/* Botão Fechar (Mobile principalmente) */}
               <button
                 onClick={closeImage}
                 className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/80 backdrop-blur-md transition-colors z-50 text-sm"
@@ -378,32 +404,28 @@ export default function FeedGrid() {
                 ✕
               </button>
 
-              {/* Área da Imagem (Shared Element Transition via layoutId) */}
-              <motion.div 
-                layoutId={`image-${filtered[selectedIndex].id}`}
-                className="relative w-full h-[35vh] sm:h-[40vh] shrink-0 z-10" 
-                style={{ backgroundColor: filtered[selectedIndex].bg }}
-              >
+              {/* Área da Imagem (100% à mostra) */}
+              <div className="relative w-full max-h-[50vh] flex items-center justify-center shrink-0" style={{ backgroundColor: filtered[selectedIndex].bg }}>
                 <Image
                   src={filtered[selectedIndex].image!}
                   alt={filtered[selectedIndex].title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 800px"
+                  width={800}
+                  height={800}
+                  className="w-full h-auto max-h-[50vh] object-contain"
                   priority
                 />
-              </motion.div>
+              </div>
 
               {/* Área do Texto (Legenda estilo post) */}
-              <div className="p-6 md:p-8 bg-white border-t border-[#E8E0D8] overflow-y-auto relative z-20">
+              <div className="p-6 bg-white border-t border-[#E8E0D8] overflow-y-auto">
                 <p className="text-[10px] tracking-[0.2em] uppercase text-[#D4A3A3] font-bold mb-2">
                   {filtered[selectedIndex].category}
                 </p>
-                <h3 className="font-[family-name:var(--font-display)] font-bold text-2xl md:text-3xl text-[#2D2D2D] mb-2 leading-tight">
+                <h3 className="font-[family-name:var(--font-display)] font-bold text-2xl text-[#2D2D2D] mb-2 leading-tight">
                   {filtered[selectedIndex].title}
                 </h3>
                 {filtered[selectedIndex].subtitle && (
-                  <p className="text-sm md:text-base text-[#7A716C] mb-5 font-medium">
+                  <p className="text-sm text-[#7A716C] mb-4 font-medium">
                     {filtered[selectedIndex].subtitle}
                   </p>
                 )}
@@ -415,30 +437,25 @@ export default function FeedGrid() {
                   ))}
                 </div>
               </div>
-
-              {/* Navegação Lado/Lado (Botões Animados) */}
-              {selectedIndex > 0 && (
-                <motion.button
-                  whileHover={{ scale: 1.1, backgroundColor: "#ffffff" }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={prevImage}
-                  className="absolute top-[17.5vh] sm:top-[20vh] left-4 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-white/90 text-[#2D2D2D] shadow-lg backdrop-blur-md z-40"
-                  aria-label="Anterior"
+              
+              {/* Controles de Navegação para Mobile (Aparece apenas se a tela for pequena) */}
+              <div className="flex sm:hidden w-full border-t border-[#E8E0D8] bg-white">
+                <button 
+                  onClick={prevImage} 
+                  disabled={selectedIndex === 0}
+                  className="flex-1 py-3 flex justify-center text-[#2D2D2D] disabled:opacity-30 active:bg-gray-100"
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-                </motion.button>
-              )}
-              {selectedIndex < filtered.length - 1 && (
-                <motion.button
-                  whileHover={{ scale: 1.1, backgroundColor: "#ffffff" }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={nextImage}
-                  className="absolute top-[17.5vh] sm:top-[20vh] right-4 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-white/90 text-[#2D2D2D] shadow-lg backdrop-blur-md z-40"
-                  aria-label="Próximo"
+                </button>
+                <div className="w-px bg-[#E8E0D8]" />
+                <button 
+                  onClick={nextImage} 
+                  disabled={selectedIndex === filtered.length - 1}
+                  className="flex-1 py-3 flex justify-center text-[#2D2D2D] disabled:opacity-30 active:bg-gray-100"
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-                </motion.button>
-              )}
+                </button>
+              </div>
 
             </motion.div>
           </motion.div>
