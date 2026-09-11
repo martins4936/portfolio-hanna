@@ -27,16 +27,6 @@ interface Card {
 const cards: Card[] = [
   /* ── Social Media ───────────────────────────────────────── */
   {
-    // Card de perfil @mimosalgados — mantido sem imagem conforme solicitado
-    id: 1, filter: "social", h: "md",
-    category: "SOCIAL MEDIA / INSTAGRAM",
-    title: "Gestão @mimosalgados",
-    subtitle: "Out/2025 – Atual",
-    tags: ["Social Media", "Estratégia", "Conteúdo"],
-    bg: "#F5E6E6", emoji: "📱",
-    igStyle: true, igHandle: "mimosalgados.oficial", igLocation: "São Paulo, Brasil",
-  },
-  {
     id: 2, filter: "social", h: "lg",
     category: "COPYWRITING / EDITORIAL",
     title: "Consistência é a única Magia",
@@ -123,7 +113,7 @@ const cards: Card[] = [
 ];
 
 /* ─── Card Component ─────────────────────────────────────── */
-function PortfolioCard({ card, index, priority }: { card: Card; index: number; priority?: boolean }) {
+function PortfolioCard({ card, index, priority, onImageClick }: { card: Card; index: number; priority?: boolean; onImageClick: (src: string) => void }) {
   const [hovered, setHovered] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
@@ -141,6 +131,9 @@ function PortfolioCard({ card, index, priority }: { card: Card; index: number; p
       className="mb-3 break-inside-avoid"
     >
       <div
+        onClick={() => {
+          if (card.image) onImageClick(card.image);
+        }}
         className={`
           relative rounded-2xl overflow-hidden group cursor-pointer ${minH} flex flex-col
           border border-[#E8E0D8]
@@ -284,10 +277,13 @@ const filters: { key: Filter; label: string }[] = [
 /* ─── Main ───────────────────────────────────────────────── */
 export default function FeedGrid() {
   const [active, setActive] = useState<Filter>("todos");
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   const filtered = active === "todos" ? cards : cards.filter((c) => c.filter === active);
+
+  const closeImage = () => setSelectedImage(null);
 
   return (
     <section id="trabalhos" ref={ref} className="max-w-6xl mx-auto px-6 pb-24">
@@ -320,9 +316,57 @@ export default function FeedGrid() {
       {/* Masonry via CSS columns */}
       <div className="columns-2 md:columns-3 gap-3">
         {filtered.map((card, i) => (
-          <PortfolioCard key={card.id} card={card} index={i} priority={i < 5} />
+          <PortfolioCard
+            key={card.id}
+            card={card}
+            index={i}
+            priority={i < 5}
+            onImageClick={setSelectedImage}
+          />
         ))}
       </div>
+
+      {/* Lightbox / Imagem Full Screen */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 md:p-8"
+            onClick={closeImage}
+          >
+            {/* Botão Fechar */}
+            <button
+              onClick={closeImage}
+              className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/80 transition-colors z-50 text-xl"
+              aria-label="Fechar"
+            >
+              ×
+            </button>
+            
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative w-full max-w-5xl h-full max-h-[90vh] rounded-xl overflow-hidden shadow-2xl"
+              onClick={(e) => e.stopPropagation()} // evita fechar ao clicar na imagem
+            >
+              <Image
+                src={selectedImage}
+                alt="Expandida"
+                fill
+                className="object-contain"
+                sizes="100vw"
+                quality={90}
+                priority
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

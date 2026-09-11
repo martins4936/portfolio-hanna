@@ -7,7 +7,6 @@ const links = [
   { emoji: "💼", label: "LinkedIn",  handle: "hanna-mel-62406b267",  href: "https://www.linkedin.com/in/hanna-mel-62406b267/" },
   { emoji: "✉️", label: "E-mail",    handle: "hannamell26@gmail.com", href: "mailto:hannamell26@gmail.com" },
   { emoji: "💬", label: "WhatsApp",  handle: "(11) 93303-7658",       href: "https://wa.me/5511933037658" },
-  { emoji: "📸", label: "Instagram", handle: "@mimosalgados.oficial",  href: "https://instagram.com/mimosalgados.oficial" },
 ];
 
 export default function Footer() {
@@ -54,7 +53,9 @@ export default function Footer() {
 
             {/* CTA de e-mail com feedback tátil completo */}
             <a
-              href="mailto:hannamell26@gmail.com"
+              href="https://wa.me/5511933037658"
+              target="_blank"
+              rel="noopener noreferrer"
               className="self-start px-6 py-3 text-sm font-semibold bg-[#D4A3A3] text-white rounded-full
                          hover:bg-[#C09090] hover:shadow-[0_8px_30px_rgba(212,163,163,0.4)]
                          active:scale-95 active:shadow-none

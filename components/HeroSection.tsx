@@ -65,7 +65,9 @@ export default function HeroSection() {
           {/* CTAs com feedback tátil */}
           <div className="flex flex-wrap justify-center sm:justify-start gap-2 pt-1">
             <a
-              href="mailto:hannamell26@gmail.com"
+              href="https://wa.me/5511933037658"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-4 py-2 text-xs font-semibold bg-[#D4A3A3] text-white rounded-full
                          hover:bg-[#C09090] hover:shadow-[0_4px_20px_rgba(212,163,163,0.4)]
                          active:scale-95 transition-all duration-300 ease-in-out"
