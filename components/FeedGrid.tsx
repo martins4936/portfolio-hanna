@@ -125,10 +125,21 @@ function PortfolioCard({ card, index, priority, onImageClick }: { card: Card; in
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 24 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.05, ease: "easeOut" }}
-      className="mb-3 break-inside-avoid"
+      initial={{ opacity: 0, scale: 0.7, y: 50 }}
+      animate={inView ? { opacity: 1, scale: 1, y: 0 } : {}}
+      transition={{ 
+        type: "spring", 
+        stiffness: 110, 
+        damping: 14, 
+        delay: index * 0.05 
+      }}
+      whileHover={{ 
+        scale: 1.03, 
+        rotate: index % 2 === 0 ? 1.5 : -1.5,
+        transition: { type: "spring", stiffness: 300, damping: 12 }
+      }}
+      whileTap={{ scale: 0.95 }}
+      className="mb-4 break-inside-avoid"
     >
       <div
         onClick={() => {
@@ -137,11 +148,9 @@ function PortfolioCard({ card, index, priority, onImageClick }: { card: Card; in
         className={`
           relative rounded-2xl overflow-hidden group cursor-pointer ${minH} flex flex-col
           border border-[#E8E0D8]
-          hover:-translate-y-2
-          hover:shadow-[0_24px_60px_rgba(45,45,45,0.14)]
+          hover:shadow-[0_30px_60px_rgba(45,45,45,0.12)]
           hover:border-[#D4A3A3]
-          active:scale-[0.98] active:translate-y-0
-          transition-all duration-500 ease-out
+          transition-colors duration-300
         `}
         style={{ backgroundColor: card.bg }}
         onMouseEnter={() => setHovered(true)}
