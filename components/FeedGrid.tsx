@@ -158,15 +158,17 @@ function PortfolioCard({ card, index, priority, onCardClick }: { card: Card; ind
       >
         {/* Imagem real de fundo */}
         {card.image && (
-          <Image
-            src={card.image}
-            alt={card.title}
-            fill
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-            sizes="(max-width: 768px) 50vw, 33vw"
-            priority={priority}
-            loading={priority ? "eager" : "lazy"}
-          />
+          <motion.div layoutId={`image-${card.id}`} className="absolute inset-0 w-full h-full z-0">
+            <Image
+              src={card.image}
+              alt={card.title}
+              fill
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              sizes="(max-width: 768px) 50vw, 33vw"
+              priority={priority}
+              loading={priority ? "eager" : "lazy"}
+            />
+          </motion.div>
         )}
 
         {/* Header estilo Instagram (card de perfil) */}
@@ -357,27 +359,31 @@ export default function FeedGrid() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-md p-4 md:p-12"
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 md:p-12"
             onClick={closeImage}
           >
             <motion.div
-              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-2xl bg-[#FDFBF7] rounded-[24px] overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.4)] flex flex-col max-h-[90vh]"
+              className="relative w-full max-w-lg bg-[#FDFBF7] rounded-[24px] overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.5)] flex flex-col max-h-[85vh]"
               onClick={(e) => e.stopPropagation()} 
             >
               {/* Botão Fechar */}
               <button
                 onClick={closeImage}
-                className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70 backdrop-blur-md transition-colors z-50 text-sm"
+                className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/80 backdrop-blur-md transition-colors z-50 text-sm"
               >
                 ✕
               </button>
 
-              {/* Área da Imagem */}
-              <div className="relative w-full h-[40vh] sm:h-[50vh] bg-[#E8E0D8] shrink-0" style={{ backgroundColor: filtered[selectedIndex].bg }}>
+              {/* Área da Imagem (Shared Element Transition via layoutId) */}
+              <motion.div 
+                layoutId={`image-${filtered[selectedIndex].id}`}
+                className="relative w-full h-[35vh] sm:h-[40vh] shrink-0 z-10" 
+                style={{ backgroundColor: filtered[selectedIndex].bg }}
+              >
                 <Image
                   src={filtered[selectedIndex].image!}
                   alt={filtered[selectedIndex].title}
@@ -386,14 +392,14 @@ export default function FeedGrid() {
                   sizes="(max-width: 768px) 100vw, 800px"
                   priority
                 />
-              </div>
+              </motion.div>
 
               {/* Área do Texto (Legenda estilo post) */}
-              <div className="p-6 md:p-8 bg-white border-t border-[#E8E0D8] overflow-y-auto">
+              <div className="p-6 md:p-8 bg-white border-t border-[#E8E0D8] overflow-y-auto relative z-20">
                 <p className="text-[10px] tracking-[0.2em] uppercase text-[#D4A3A3] font-bold mb-2">
                   {filtered[selectedIndex].category}
                 </p>
-                <h3 className="font-[family-name:var(--font-display)] font-bold text-2xl md:text-3xl text-[#2D2D2D] mb-1 leading-tight">
+                <h3 className="font-[family-name:var(--font-display)] font-bold text-2xl md:text-3xl text-[#2D2D2D] mb-2 leading-tight">
                   {filtered[selectedIndex].title}
                 </h3>
                 {filtered[selectedIndex].subtitle && (
@@ -410,24 +416,28 @@ export default function FeedGrid() {
                 </div>
               </div>
 
-              {/* Navegação Lado/Lado (Dentro da imagem, nas bordas) */}
+              {/* Navegação Lado/Lado (Botões Animados) */}
               {selectedIndex > 0 && (
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.1, backgroundColor: "#ffffff" }}
+                  whileTap={{ scale: 0.9 }}
                   onClick={prevImage}
-                  className="absolute top-[25vh] sm:top-[30vh] left-4 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-white/80 hover:bg-white text-[#2D2D2D] shadow-lg backdrop-blur-md transition-all active:scale-95 z-40"
+                  className="absolute top-[17.5vh] sm:top-[20vh] left-4 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-white/90 text-[#2D2D2D] shadow-lg backdrop-blur-md z-40"
                   aria-label="Anterior"
                 >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-                </button>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                </motion.button>
               )}
               {selectedIndex < filtered.length - 1 && (
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.1, backgroundColor: "#ffffff" }}
+                  whileTap={{ scale: 0.9 }}
                   onClick={nextImage}
-                  className="absolute top-[25vh] sm:top-[30vh] right-4 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-white/80 hover:bg-white text-[#2D2D2D] shadow-lg backdrop-blur-md transition-all active:scale-95 z-40"
+                  className="absolute top-[17.5vh] sm:top-[20vh] right-4 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-white/90 text-[#2D2D2D] shadow-lg backdrop-blur-md z-40"
                   aria-label="Próximo"
                 >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-                </button>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                </motion.button>
               )}
 
             </motion.div>
