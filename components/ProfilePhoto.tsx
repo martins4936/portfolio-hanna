@@ -6,7 +6,6 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 /* ─────────────────────────────────────────────────────────────
    🔑 ATALHO SECRETO: Shift + Alt + H
-   Painel admin mantido.
 ───────────────────────────────────────────────────────────── */
 const isSecretCombo = (e: KeyboardEvent) =>
   e.shiftKey && e.altKey && e.code === "KeyH";
@@ -31,7 +30,6 @@ function load(): Settings {
   }
 }
 
-/* ─── Componente principal ─────────────────────────────────── */
 export default function ProfilePhoto() {
   const [cfg, setCfg] = useState<Settings>(DEFAULT);
   const [open, setOpen] = useState(false);
@@ -43,8 +41,8 @@ export default function ProfilePhoto() {
   const y = useMotionValue(0);
   const mouseXSpring = useSpring(x, { stiffness: 150, damping: 20 });
   const mouseYSpring = useSpring(y, { stiffness: 150, damping: 20 });
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["15deg", "-15deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-15deg", "15deg"]);
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["12deg", "-12deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-12deg", "12deg"]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!ref.current) return;
@@ -94,29 +92,22 @@ export default function ProfilePhoto() {
   const { zoom, posX, posY } = ready ? cfg : DEFAULT;
 
   return (
-    <div className="shrink-0 flex flex-col items-center gap-2 relative z-10" style={{ perspective: "1000px" }}>
+    <div className="shrink-0 flex flex-col items-center gap-4 relative z-20" style={{ perspective: "1000px" }}>
 
-      {/* ── Aura brilhante flutuante atrás do card ── */}
-      <motion.div
-        animate={{ scale: [1, 1.2, 1], opacity: [0.4, 0.7, 0.4] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute inset-0 bg-[#D4A3A3]/40 blur-[30px] rounded-full -z-10"
-      />
-
-      {/* ── Glass Card com 3D Tilt ── */}
+      {/* ── Glass Card Arch com 3D Tilt ── */}
       <motion.div
         ref={ref}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className="relative p-3 pb-4 bg-white/40 backdrop-blur-xl border border-white/60 
-                   rounded-[2rem] shadow-[0_20px_40px_rgba(212,163,163,0.15)] 
-                   flex flex-col items-center gap-4 cursor-crosshair
-                   transition-shadow duration-300 hover:shadow-[0_30px_60px_rgba(212,163,163,0.25)]"
+        className="relative p-3 bg-white/40 backdrop-blur-xl border border-white/60 
+                   rounded-t-[200px] rounded-b-[40px] shadow-[0_30px_60px_rgba(212,163,163,0.15)] 
+                   flex flex-col items-center cursor-crosshair
+                   transition-shadow duration-300 hover:shadow-[0_40px_80px_rgba(212,163,163,0.25)]"
       >
-        {/* Foto Interna que flutua no eixo Z */}
+        {/* Foto Interna em formato de Arco */}
         <div 
-          className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-3xl overflow-hidden shadow-inner border border-white/40"
+          className="relative w-64 h-[340px] sm:w-[300px] sm:h-[400px] rounded-t-[200px] rounded-b-[32px] overflow-hidden shadow-inner border border-white/40"
           style={{ transform: "translateZ(40px)" }}
         >
           <div
@@ -133,19 +124,19 @@ export default function ProfilePhoto() {
               fill
               className="object-cover"
               style={{ objectPosition: `${posX}% ${posY}%` }}
-              sizes="(max-width: 640px) 128px, 160px"
+              sizes="(max-width: 640px) 256px, 300px"
               priority
             />
           </div>
         </div>
 
-        {/* Badge flutuante */}
+        {/* Badge flutuante (movido para o topo direito em cima do arco) */}
         <div 
-          className="flex items-center gap-2 px-3 py-1.5 bg-white/80 backdrop-blur-md 
-                     border border-white/60 rounded-full shadow-sm"
+          className="absolute -top-3 -right-4 flex items-center gap-2 px-3 py-1.5 bg-white/80 backdrop-blur-md 
+                     border border-white/60 rounded-full shadow-md"
           style={{ transform: "translateZ(60px)" }}
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#7BC67E] animate-pulse shadow-[0_0_8px_#7BC67E]" />
+          <span className="w-2 h-2 rounded-full bg-[#7BC67E] animate-pulse shadow-[0_0_8px_#7BC67E]" />
           <span className="text-[9px] text-[#2D2D2D] font-bold uppercase tracking-widest">
             Disponível
           </span>
@@ -230,7 +221,7 @@ export default function ProfilePhoto() {
               className="flex-1 text-xs py-2 bg-[#D4A3A3] text-white rounded-full
                          hover:bg-[#C09090] active:scale-95 transition-all duration-200"
             >
-              Salvar & Fechar
+              Salvar
             </button>
           </div>
         </div>
