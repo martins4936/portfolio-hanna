@@ -83,9 +83,20 @@ export default function Footer() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.7, delay: 0.6 }}
-          className="w-full pt-8 border-t border-[#E4DAC4]/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] tracking-widest uppercase text-[#E4DAC4]/40"
+          className="w-full pt-8 border-t border-[#E4DAC4]/10 flex flex-col sm:flex-row justify-between items-center gap-3 text-[10px] tracking-widest uppercase text-[#E4DAC4]/40"
         >
           <p>© {new Date().getFullYear()} Hanna Mel</p>
+          <a
+            href="https://github.com/martins4936"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 hover:text-[#D4A3A3] transition-colors duration-300 group"
+          >
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-60 group-hover:opacity-100 transition-opacity">
+              <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+            </svg>
+            Design &amp; Dev — Caique Martins
+          </a>
           <p>São Paulo · SP · Brasil</p>
         </motion.div>
       </div>
