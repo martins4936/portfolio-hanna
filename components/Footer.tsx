@@ -37,10 +37,10 @@ export default function Footer() {
               <br />juntas?
             </h2>
 
-            <p className="text-sm text-[#9A8F88] leading-relaxed max-w-xs">
-              Disponível para estágios, projetos freelance e oportunidades em{" "}
+            <p className="text-sm text-[#9A8F88] leading-relaxed max-w-[340px]">
+              Disponível para estágios, projetos freelance e novas{" "}
               <span className="font-semibold text-[#2D2D2D]">
-                Social Media, Marketing Digital e Comunicação Estratégica
+                oportunidades em diversas áreas da Comunicação, Marketing e Criação
               </span>.
             </p>
 
