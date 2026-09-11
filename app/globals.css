@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #FDFBF7;
+  --color-surface: #F5F1EB;
+  --color-surface2: #EDE7DF;
+  --color-text: #2D2D2D;
+  --color-muted: #9A8F88;
+  --color-accent: #D4A3A3;
+  --color-accent-hover: #C09090;
+  --color-border: #E8E0D8;
+  --color-border-strong: #D8CEC6;
+
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Lato", system-ui, sans-serif;
+}
+
+/* ── Scroll suave nativo (âncoras) ── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Offset para header fixo (evita conteúdo escondido atrás do nav) ── */
+[id] {
+  scroll-margin-top: 72px;
+}
+
+body {
+  background-color: #FDFBF7;
+  color: #2D2D2D;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbar personalizada ── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: #FDFBF7; }
+::-webkit-scrollbar-thumb { background: #D4A3A3; border-radius: 2px; }
+
+/* ── Selection highlight ── */
+::selection { background: #D4A3A3; color: #fff; }
