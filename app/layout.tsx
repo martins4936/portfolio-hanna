@@ -85,29 +85,64 @@ export default function RootLayout({
         {/* ── Conteúdo principal ── */}
         <div className="relative z-10">{children}</div>
 
-        {/* ── Badge "Built by Caique Martins" ── */}
+        {/* ── Terminal Badge "Built by Caique Martins" ── */}
+        <style>{`
+          @keyframes terminal-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+          }
+          .terminal-cursor {
+            display: inline-block;
+            width: 7px;
+            height: 12px;
+            background: #D4A3A3;
+            margin-left: 3px;
+            vertical-align: middle;
+            animation: terminal-blink 1s step-end infinite;
+          }
+          .terminal-badge-wrap {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+          }
+          .terminal-badge-wrap:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.35) !important;
+          }
+        `}</style>
         <a
           href="https://www.linkedin.com/in/caiquealmeidati/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Built by Caique Martins"
-          className="
-            fixed bottom-5 left-5 z-[9000]
-            flex items-center gap-2
-            px-4 py-2.5
-            rounded-full
-            text-[11px] font-medium tracking-wide text-[#E4DAC4]
-            bg-[#2D2D2D]/90 backdrop-blur-md
-            shadow-[0_8px_24px_rgba(0,0,0,0.25)]
-            border border-white/5
-            transition-all duration-300 ease-out
-            hover:bg-[#D4A3A3]/90 hover:-translate-y-1
-            hover:shadow-[0_12px_32px_rgba(212,163,163,0.3)]
-            active:scale-95
-          "
+          className="terminal-badge-wrap fixed bottom-5 left-5 z-[9000] block"
+          style={{
+            background: "#1A1A1A",
+            borderRadius: "10px",
+            padding: "10px 14px",
+            border: "1px solid #333",
+            boxShadow: "0 8px 30px rgba(0,0,0,0.3)",
+            minWidth: "200px",
+            textDecoration: "none",
+          }}
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#D4A3A3] animate-pulse" />
-          <span>&lt;/&gt; Built by <strong>Caique Martins</strong></span>
+          {/* Dots */}
+          <div style={{ display: "flex", gap: "5px", marginBottom: "8px" }}>
+            <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#FF5F57", display: "block" }} />
+            <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#FFBD2E", display: "block" }} />
+            <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#28CA41", display: "block" }} />
+          </div>
+          {/* Line 1 */}
+          <div style={{ fontFamily: "'Courier New', monospace", fontSize: "11px", display: "flex", gap: "5px", alignItems: "center" }}>
+            <span style={{ color: "#4EC9B0" }}>dev</span>
+            <span style={{ color: "#555" }}>@</span>
+            <span style={{ color: "#D4D4D4" }}>portfolio</span>
+            <span style={{ color: "#555" }}>~$</span>
+          </div>
+          {/* Line 2 */}
+          <div style={{ fontFamily: "'Courier New', monospace", fontSize: "11px", display: "flex", alignItems: "center", marginTop: "3px" }}>
+            <span style={{ color: "#9A8F88" }}>built by&nbsp;</span>
+            <span style={{ color: "#D4A3A3", fontWeight: 600 }}>Caique Martins</span>
+            <span className="terminal-cursor" />
+          </div>
         </a>
 
       </body>
